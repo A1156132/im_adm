@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminUserAuth">
+
+	<!-- 사번으로 사용자 접근정보 조회 -->
+	<select id="getIPCheck" parameterType="com.mobis.im.vo.AdminUserAuthVO" resultType="com.mobis.im.vo.AdminUserAuthVO">
+	    SELECT TOP 1 * FROM WFUSER.ADMIN_USER_AUTH 
+	    WHERE USER_ID = #{user_id}
+	    	AND USE_YN = 'Y'
+	    	ORDER BY UPDATE_DT DESC
+	</select>
+	
+
+	<!-- 사번으로 사용자 접근정보 조회 -->
+	<select id="getUserList" parameterType="com.mobis.im.vo.AdminUserAuthVO" resultType="java.util.HashMap">
+	    SELECT * FROM WFUSER.ADMIN_USER_AUTH 
+	    WHERE USER_ID = #{user_id} AND USE_YN = 'Y'
+	    ORDER BY SYS_NAME
+	</select>
+	
+
+</mapper>

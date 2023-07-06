@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC '-//mybatis.org//DTD Config 3.0//EN' 
+	'http://mybatis.org/dtd/mybatis-3-config.dtd'>
+<configuration>
+	<settings>
+		<setting name='cacheEnabled' value='false'/>
+		<setting name='localCacheScope' value='STATEMENT'/>
+	</settings>
+	<!--mapper에서 매칭할 parmeter Type 별칭 설정-->
+	<!-- <typeAliases>
+		<typeAlias type="kr.or.iei.student.model.vo.Student" alias="student"/>
+	</typeAliases> -->
+	
+	<typeAliases>
+		<package name='com.mobis.im.domain'/> 
+	</typeAliases>
+	
+<!-- 	<mappers>
+		로그인 
+		<mapper resource="/mapper/adminUserAuth-mapper.xml"/> 
+		#시스템명#_IM_USER 
+		<mapper resource="/mapper/imUserViews-mapper.xml"/> 
+		<mapper resource="/mapper/userSysInfo-mapper.xml"/> 
+		
+	</mappers> -->
+
+</configuration> 

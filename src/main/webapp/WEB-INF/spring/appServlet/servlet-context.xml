@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns:mvc='http://www.springframework.org/schema/mvc' 
+    xmlns:mybatis='http://mybatis.org/schema/mybatis-spring'   
+    xmlns:context='http://www.springframework.org/schema/context'
+    xmlns:tx='http://www.springframework.org/schema/tx'
+    xsi:schemaLocation='http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://mybatis.org/schema/mybatis-spring
+	http://mybatis.org/schema/mybatis-spring.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd'>
+    
+    <mvc:annotation-driven />
+ 
+    <mvc:resources mapping='/resources/**' location='/resources/'/>
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<!-- 운영 DB -->
+		<property name="url" value="jdbc:sqlserver://10.10.163.99:1433;databaseName=IMDB" />
+		<property name="username" value="wfuser" />
+		<property name="password" value="akRldiEh$2014" />
+	<!-- 	개발 DB
+		<property name="url" value="jdbc:sqlserver://10.240.229.224:1433;databaseName=IMDB" />
+		<property name="username" value="sa" />
+		<property name="password" value="P@ssw0rd" />
+		 -->
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+		<property name="mapperLocations" value="classpath:mybatis/mapper/*.xml"/>
+	</bean>
+	
+	<!-- 
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url" value="${spring.datasource.imdb.jdbc-url}" />
+		<property name="username" value="${spring.datasource.imdb.username}" />
+		<property name="password" value="${spring.datasource.imdb.password}" />
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="${spring.mybatis.imdb.config}"/>
+		<property name="mapperLocations" value="${spring.mybatis.imdb.mapper-locations}"/>
+	</bean>
+	 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+    	<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+	<!-- <mybatis:scan base-package='songjeongwoo.godgamez.dao.map.**'/> -->
+	
+	<context:component-scan base-package="com.mobis.im.controller"/>
+	
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	  <property name="prefix" value="/WEB-INF/views/" />
+	  <property name="suffix" value=".jsp" />
+	</bean>
+	
+	<bean id='multipartResolver' class='org.springframework.web.multipart.commons.CommonsMultipartResolver'>
+		<property name='maxUploadSize' value='5242880'/><!-- 단위: 바이트, 5MB -->
+		<property name='maxInMemorySize' value='5242880'/>
+		<property name='defaultEncoding' value='utf-8'/>
+	</bean>
+	
+	<context:property-placeholder location='classpath:application.properties'/>
+	
+	<!-- service단에서도 transaction을 관리-->
+	<bean id='transactionManager' class='org.springframework.jdbc.datasource.DataSourceTransactionManager'>
+		<property name='dataSource' ref='dataSource'/>
+	</bean>
+	
+	<tx:annotation-driven/> <!-- @Transactional을 사용가능 -->
+	
+	<!-- BEAN등록  -->
+	<!-- <bean id="userService" class="com.mobis.im.service.UserServiceImpl" /> -->
+	<bean id="LoginService" class="com.mobis.im.service.AdminUserAuthImpl" />
+	<bean id="imUserViewService" class="com.mobis.im.service.ImUserViewImpl" />	
+	<bean id="userSysInfoService" class="com.mobis.im.service.UserSysInfoServiceImpl" />	
+	
+	<bean id="mobisImUserDao" class="com.mobis.im.dao.MobisImUserDAO" />
+	<bean id="adminUserAuthDAO" class="com.mobis.im.dao.AdminUserAuthDAO" />
+	<bean id="imUserViewDAO" class="com.mobis.im.dao.ImUserViewDAO" />
+	
+	
+</beans>

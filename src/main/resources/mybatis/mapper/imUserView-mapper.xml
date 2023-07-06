@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="imUserView">
+
+	<!-- AIP	문서해제센터(AIP)  -->
+	<select id="getAIPImUser" parameterType="com.mobis.im.vo.ImUserViewVO" resultType="com.mobis.im.vo.ImUserViewVO">
+	    SELECT * FROM imdb.wfuser.aip_im_user 
+		ORDER BY PROV_DT DESC, BRANCH_CD, USER_ID
+	</select>
+	
+	<!-- BOT	챗봇(CHATBOT)  -->
+	<select id="getBOTImUser" parameterType="com.mobis.im.vo.ImUserViewVO" resultType="com.mobis.im.vo.ImUserViewVO">
+	    SELECT * FROM imdb.wfuser.BOT_im_user
+	    ORDER BY PROV_DT DESC, BRANCH_CD, USER_ID
+	</select>
+
+	<!-- BSD	악성메일모의훈련(BSD)  -->
+	<select id="getBSDImUser" parameterType="com.mobis.im.vo.ImUserViewVO" resultType="com.mobis.im.vo.ImUserViewVO">
+	    SELECT * FROM imdb.wfuser.BSD_im_user
+	    ORDER BY PROV_DT DESC, BRANCH_CD, USER_ID
+	</select>
+	
+	<!-- CDATA	데이터카탈로그(DataCatalog)  -->
+	<select id="getCDATAImUser" parameterType="com.mobis.im.vo.ImUserViewVO" resultType="com.mobis.im.vo.ImUserViewVO">
+	    SELECT * FROM imdb.wfuser.CDATA_im_user
+	    ORDER BY PROV_DT DESC, BRANCH_CD, USER_ID
+	</select>
+	<!-- 
+CEN	도면중앙화시스템(ubCentra)
+CMS	통합원가관리시스템(MICMS)
+CRM	고객관계관리스템(CRM)
+DDC	문서암호화(DDC)
+DLP	네트워크 정보유출차단 시스템(DLP)
+DRM	문서암호화(DRM)
+ECM	국내 엠클라우드(MCloud)
+ECMB	브라질 엠클라우드(MCloud)
+ECMC	중국 엠클라우드(MCloud)
+ECMD	두바이 엠클라우드(MCloud)
+ECME	유럽 엠클라우드(MCloud)
+ECMI	인도 엠클라우드(MCloud)
+ECMM	멕시코 엠클라우드(MCloud)
+ECMR	미주 엠클라우드(MCloud)
+ECMT	터키 엠클라우드(MCloud)
+EMS	에너지관리시스템(EMS)
+EWMS	구 조기경보시스템(EWMS)
+FAX	팩스(FAX)
+FEM	재경 엠클라우드(MCloud)
+FLOW	업무협업툴 플로우(FLOW)
+FMC	사내전화(FMC)
+FMS	시설공사 관리시스템(FMS)
+FTS	통합파일전송시스템(FTS)
+GBI	GLOBAL BI(GBI)
+GBM	수평전개시스템(GBM)
+GEC	모비스쿨(GEC)
+GIA	글로벌 내부통제시스템(GIA)
+GLS	글로벌 법무시스템(GLS)
+GMDM	GMDM
+GMPMS	정원관리시스템(GMPMS)
+GMPS	글로벌마케팅포털(GMPS)
+GPOMS	글로벌업무표준관리(GPOMS)
+HDM	조기경보시스템(HDM)
+HIMS	건강관리시스템(HIMS)
+IAM	IT자산관리시스템(ITAM)
+IMO	그룹웨어 OneMobis
+IMS	IR투자자 관리시스템 (IMS)
+IPMS	지식재산권관리시스템(IPMS)
+ITI	IT과제관리시스템(ITIM)
+ITS	ITSM(IT HelpDesk)
+LAKE	데이터레이크(DATALAKE)
+LIM	물류업체선정시스템(LIMS)
+LMS	법무지원시스템(LMS)
+LPI	중장기 사업계획시스템(LPI)
+MCMS	물질정보시스템(MCMS)
+MEDP	Method Park Stages(MEDP)
+MEM	출입통제시스템(MEM)
+MES	MES 웹시스템(MES)
+MGI	온실가스관리시스템(MGI)
+MGI	투자관리시스템(MGI)
+MGN	부품시스템(MGN)
+MILE	마일리지시스템(MILE)
+MKC	백과사전시스템(MKC)
+MMS	경영회의통합관리(MMS)
+MON	모비스온메신저(MobisOn)
+MPB	차량부품영업시스템(MPB)
+MPG	MPGMS
+MPOS	구매본부 웹 포털(MPOS)
+MPR	(MPRMS)
+MSCP	(MSCP)
+MSIS	영업정보시스템(MSIS)
+MTCP	통상통합포탈(MTCP)
+MTMS	모듈포탈(MTMS)
+MWD	공감(MWD)
+NAC	네트워크제어(NAC)
+NSMT	New SmartSystem(NSMT)
+OSIMS	오픈소스준수관리시스템-NEW(OSIMS)
+OSMCS	오픈소스준수관리시스템-OLD(OSMCS)
+PKI	인증서(PKI)
+PLM	연구소 PLM시스템
+PLUS	(PLUS)
+PRINT	복합기(PRINT)
+QMS	(QMS)
+RUS	Radius,TAS전화인증시스템(RUS)
+SEN	조기경보시스템(SENIUS)
+SHARE	(SHARE)
+SHE	안전환경시스템(SHE)
+SPS	국내보안포탈(SPS)
+UBC	ubCUBE(UBC)
+UISM	의왕출입관리시스템(UISM)
+USB	보안USB(USB)
+VIR	R&D SW 개발용 Cluster 관리시스템(MCLOVIR)
+VIRA	R&D SW 개발용 Cluster 관리시스템(MTCA)
+VIRE	R&D SW 개발용 Cluster 관리시스템(MTCE)
+VIRI	R&D SW 개발용 Cluster 관리시스템(MTCI)
+VST	방문자예약시스템(VST)  -->
+
+	<!-- sps  -->
+	<select id="getSPSImUser" parameterType="com.mobis.im.vo.ImUserViewVO" resultType="com.mobis.im.vo.ImUserViewVO">
+	   	SELECT *
+		FROM [IMDB].[wfuser].[SPS_IM_USER] WITH(NOLOCK)
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="start_dt != null">
+				PROV_DT BETWEEN #{start_dt} AND #{end_dt}
+			</if>
+			<if test="user_id != null">
+				AND user_id LIKE '%'+#{user_id}+'%'
+			</if>
+			<if test="name != null">
+				AND name LIKE '%'+#{name}+'%'
+			</if>
+			<if test="dept_nm != null">
+				AND dept_nm LIKE '%'+#{dept_nm}+'%'
+			</if>
+		</trim>
+		ORDER BY PROV_DT DESC, BRANCH_CD, USER_ID
+		<choose> <!-- 페이징처리 --> 
+			<when test="pageNumber eq 1"> 	
+	    		OFFSET 0 rows	
+	    		FETCH NEXT 100 ROWS ONLY;
+    		</when>
+    		<otherwise>
+    		<![CDATA[   	
+    		OFFSET (#{pageNumber} * 100) rows	
+    		FETCH NEXT 100 ROWS ONLY;
+    		]]>
+    		</otherwise>
+		</choose>
+
+    	
+	</select>
+	<!-- sps  -->
+	<select id="getSPSImUserCnt" parameterType="com.mobis.im.vo.ImUserViewVO" resultType="int">
+	   	SELECT count(user_id) AS total_cnt
+		FROM [IMDB].[wfuser].[SPS_IM_USER] WITH(NOLOCK)
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="start_dt != null">
+				PROV_DT BETWEEN #{start_dt} AND #{end_dt}
+			</if>
+			<if test="user_id != null">
+				AND user_id LIKE '%'+#{user_id}+'%'
+			</if>
+			<if test="name != null">
+				AND name LIKE '%'+#{name}+'%'
+			</if>
+			<if test="dept_nm != null">
+				AND dept_nm LIKE '%'+#{dept_nm}+'%'
+			</if>
+		</trim>
+	</select>
+
+	<!-- itsm  -->
+	<select id="getITSImUser" parameterType="com.mobis.im.vo.ImUserViewVO" resultType="com.mobis.im.vo.ImUserViewVO">
+	    SELECT * FROM [IMDB].[wfuser].[ITSM_IM_USER]
+	    ORDER BY PROV_DT DESC, BRANCH_CD, USER_ID
+	</select>
+	
+
+</mapper>
