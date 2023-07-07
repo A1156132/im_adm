@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 
-import com.mobis.im.service.UserSysInfoService;
+import com.mobis.im.service.UserSysMstService;
 /**
  * 협력사 계정 권한 조회 화면
  * 
@@ -25,7 +25,7 @@ public class UserSysInfoController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserSysInfoController.class); 
 
 	@Autowired
-	UserSysInfoService userSysService;
+	UserSysMstService userSysService;
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
 	public ModelAndView userAuth(@RequestParam String pram) throws Exception {

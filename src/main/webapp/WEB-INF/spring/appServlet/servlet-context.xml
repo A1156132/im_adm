@@ -86,7 +86,7 @@
 	<!-- <bean id="userService" class="com.mobis.im.service.UserServiceImpl" /> -->
 	<bean id="LoginService" class="com.mobis.im.service.AdminUserAuthImpl" />
 	<bean id="imUserViewService" class="com.mobis.im.service.ImUserViewImpl" />	
-	<bean id="userSysInfoService" class="com.mobis.im.service.UserSysInfoServiceImpl" />	
+	<bean id="userSysMstService" class="com.mobis.im.service.UserSysMstServiceImpl" />	
 	
 	<bean id="mobisImUserDao" class="com.mobis.im.dao.MobisImUserDAO" />
 	<bean id="adminUserAuthDAO" class="com.mobis.im.dao.AdminUserAuthDAO" />

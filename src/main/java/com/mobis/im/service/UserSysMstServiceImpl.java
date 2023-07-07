@@ -12,7 +12,7 @@ import com.mobis.im.common.AES256Utils;
 import com.mobis.im.dao.MobisImUserDAO;
 
 @Service("userSysInfoService")
-public class UserSysInfoServiceImpl implements UserSysInfoService {
+public class UserSysMstServiceImpl implements UserSysMstService {
 
 	@Autowired
 	MobisImUserDAO mobisImUserDAO;

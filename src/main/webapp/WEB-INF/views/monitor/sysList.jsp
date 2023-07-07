@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,11 +109,12 @@ label{color:#777; font-weight:bold;}
 </head>
 <body>
 <div id="wrap">
+<!-- header -->
+<%@ include file="../header.jsp" %>
+<!-- // header -->
 <div class="desc_box">
-	<h1>*시스템 모니터링 페이지</h1>
-	 - 사용자 상세 정보는 라인을  클릭하세요.</br>
-	 - 프로비전 일자 : IM시스템에서 해당 사용자 정보를 배포한 날짜</br>
-	 - 동기화 상태 : 연계 시스템의 동기화여부 (동기화여부란이 N인 경우 IM에서 배포되었으나 연계시스템에서 인사배치가 수행되지 않은 상태)</br>
+	<h1>*시스템 모니터링</h1>
+	 - 사용자 상세 정보는 라인을  클릭하세요. 도움말 우측 상단 </br>
 	</div>
 <div id="main_div">
 	<form id="search_form" action="provList" method="POST">
@@ -164,20 +166,20 @@ label{color:#777; font-weight:bold;}
 		</thead>
 		<tbody>
 			<c:forEach var="user" items="${userList}">
-			<tr style="cursor:pointer"onmouseover="this.style.background='#f3f3f4'" onmouseout="this.style.background='white'">
-				<td style="width:10%">${user.branch_nm}(${user.branch_cd})</td>
-				<td style="width:10%">${user.user_id}</td>
-				<td style="width:15%">${user.name}</td>
-				<td style="width:20%">${user.dept_nm}</td>
-				<c:if test='${user.status eq "3"}'><td style="width:5%">재직</td></c:if>
-				<c:if test='${user.status eq "0"}'><td style="width:5%; color:red;">퇴직</td></c:if>
-				<c:if test='${user.status eq "1"}'><td style="width:5%; color:orange;">휴직</td></c:if>
-				<td style="width:15%">${user.position_out_nm}<c:if test='${user.duty_nm ne "" && not empty user.duty_nm}'>/${user.duty_nm}</c:if></td>
-				<td style="width:10%">${user.prov_dt}</td>
-				<td style="width:5%">${user.flag}</td>
-				<td style="width:10%">${user.sync_dt}</td>
-				<!-- <td>-</td>-->
-			</tr>
+				<tr style="cursor:pointer"onmouseover="this.style.background='#f3f3f4'" onmouseout="this.style.background='white'">
+					<td style="width:10%">${user.branch_nm}(${user.branch_cd})</td>
+					<td style="width:10%">${user.user_id}</td>
+					<td style="width:15%">${user.name}</td>
+					<td style="width:20%">${user.dept_nm}</td>
+					<c:if test='${user.status eq "3"}'><td style="width:5%">재직</td></c:if>
+					<c:if test='${user.status eq "0"}'><td style="width:5%; color:red;">퇴직</td></c:if>
+					<c:if test='${user.status eq "1"}'><td style="width:5%; color:orange;">휴직</td></c:if>
+					<td style="width:15%">${user.position_out_nm}<c:if test='${user.duty_nm ne "" && not empty user.duty_nm}'>/${user.duty_nm}</c:if></td>
+					<td style="width:10%"> ${user.prov_dt}</td>
+					<td style="width:5%">${user.flag}</td>
+					<td style="width:10%">${user.sync_dt}</td>
+					<!-- <td>-</td>-->
+				</tr>
 			</c:forEach>
 		
 		</tbody>
@@ -253,6 +255,8 @@ label{color:#777; font-weight:bold;}
 	<!--// navigator -->
 	
 </div> <!-- // main DIV -->
+<!-- footer -->
 <%@ include file="../footer.jsp" %>
+<!-- //footer -->
 </body>
 </html>

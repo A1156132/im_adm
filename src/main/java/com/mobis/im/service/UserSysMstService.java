@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public interface UserSysInfoService {
+public interface UserSysMstService {
 	public List<Map<String, String>> getUserAuthListByUserId(String userId) throws Exception;
 	public Map<String, List<String>> getAllAuthManager() throws Exception;
 }
