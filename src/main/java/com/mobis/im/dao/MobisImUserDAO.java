@@ -16,10 +16,6 @@ public class MobisImUserDAO {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 
-	public String getUserName(String userId) throws Exception {
-		return this.sqlSessionTemplate.selectOne("user.getUserName", userId);
-	}
-	
 	public List<Map<String, String>> getUserAuthListByUserId(String userId) throws Exception {
 		return this.sqlSessionTemplate.selectList("userSys.getUserAuthListByUserId", userId);
 	}
