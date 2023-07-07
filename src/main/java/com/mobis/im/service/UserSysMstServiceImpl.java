@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.mobis.im.common.AES256Utils;
 import com.mobis.im.dao.MobisImUserDAO;
 
-@Service("userSysInfoService")
+@Service("userSysMstService")
 public class UserSysMstServiceImpl implements UserSysMstService {
 
 	@Autowired

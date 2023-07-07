@@ -17,11 +17,11 @@ public class MobisImUserDAO {
 	SqlSessionTemplate sqlSessionTemplate;
 
 	public List<Map<String, String>> getUserAuthListByUserId(String userId) throws Exception {
-		return this.sqlSessionTemplate.selectList("userSys.getUserAuthListByUserId", userId);
+		return this.sqlSessionTemplate.selectList("userSysMst.getUserAuthListByUserId", userId);
 	}
 	
 	public List<Map<String, String>> getAllAuthManager() throws Exception {
-		return this.sqlSessionTemplate.selectList("userSys.getAllAuthManager");
+		return this.sqlSessionTemplate.selectList("userSysMst.getAllAuthManager");
 	}
 	
 	// 사용자 정보 조회

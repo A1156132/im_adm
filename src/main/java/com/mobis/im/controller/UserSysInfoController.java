@@ -25,16 +25,16 @@ public class UserSysInfoController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserSysInfoController.class); 
 
 	@Autowired
-	UserSysMstService userSysService;
+	UserSysMstService userSysMstService;
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
 	public ModelAndView userAuth(@RequestParam String pram) throws Exception {
 		System.out.println("User Auth Controller");
 		String userId = pram;
 		ModelAndView mav = new ModelAndView();
-		List<Map<String, String>> authList = userSysService.getUserAuthListByUserId(userId);
+		List<Map<String, String>> authList = userSysMstService.getUserAuthListByUserId(userId);
 		mav.addObject("authList", authList);
-		mav.addObject("managerInfo",userSysService.getAllAuthManager());
+		mav.addObject("managerInfo",userSysMstService.getAllAuthManager());
 		mav.setViewName("/user/auth");
 		return mav;
 	}
