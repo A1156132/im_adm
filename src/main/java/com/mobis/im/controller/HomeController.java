@@ -48,7 +48,6 @@ public class HomeController {
 	@RequestMapping(value = "/loginChk", method = RequestMethod.POST)
 	public String loginChk(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception{
 		
-		// 테스트 컨트롤러
 		Map<String, Object> result = new HashMap<>();
 		String login_user_id =   validaitonUtils.getParameterStr(request.getParameter("login_user_id"));
 
