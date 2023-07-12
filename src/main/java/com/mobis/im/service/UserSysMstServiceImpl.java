@@ -9,17 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mobis.im.common.AES256Utils;
-import com.mobis.im.dao.MobisImUserDAO;
+import com.mobis.im.dao.UserSysMstDAO;
 
 @Service("userSysMstService")
 public class UserSysMstServiceImpl implements UserSysMstService {
 
 	@Autowired
-	MobisImUserDAO mobisImUserDAO;
+	UserSysMstDAO userSysMstDAO;
 
 	@Override
 	public List<Map<String, String>> getUserAuthListByUserId(String userId) throws Exception {
-		List<Map<String, String>> authList = mobisImUserDAO.getUserAuthListByUserId(userId);
+		List<Map<String, String>> authList = userSysMstDAO.getUserAuthListByUserId(userId);
 		
 		if(authList.size() != 0 && authList != null) {
 			Map<String, List<String>> authManager = getAllAuthManager();
@@ -36,7 +36,7 @@ public class UserSysMstServiceImpl implements UserSysMstService {
 
 	@Override
 	public Map<String, List<String>> getAllAuthManager() throws Exception {	
-		List<Map<String, String>> authInfoList = mobisImUserDAO.getAllAuthManager();
+		List<Map<String, String>> authInfoList = userSysMstDAO.getAllAuthManager();
 		// <시스템, 담당자리스트>
 		Map<String, List<String>> authManager = new HashMap<String, List<String>>(); 
 		
