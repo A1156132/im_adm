@@ -51,7 +51,7 @@ public class QuartzServiceImpl implements QuartzService {
 				sendInfo.put("text", "테스트");
 				System.out.println(user.getUser_id()+": "+user.getTo_email());
 				// 메일 발송 프로시저 호출
-				String result = userMailDAO.procSendSysListMail(sendInfo);
+//				String result = userMailDAO.procSendSysListMail(sendInfo);
 			}
 		}
 	}
