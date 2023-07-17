@@ -34,7 +34,6 @@ public class UserSysInfoController {
 		ModelAndView mav = new ModelAndView();
 		List<Map<String, String>> authList = userSysMstService.getUserAuthListByUserId(userId);
 		mav.addObject("authList", authList);
-		mav.addObject("managerInfo",userSysMstService.getAllAuthManager());
 		mav.setViewName("/user/auth");
 		return mav;
 	}

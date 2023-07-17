@@ -20,9 +20,6 @@ public class UserMailDAO {
 	}
 	
 	public String procSendSysListMail(Map<String, String> map) {
-		System.out.println("dao");
-		System.out.println(map.get("user_id"));
-		System.out.println(map.get("to_email"));
 		return this.sqlSessionTemplate.selectOne("userMail.procSendSysListMail", map);
 	}
 
