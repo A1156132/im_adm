@@ -2,19 +2,16 @@
 <!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="userSysMst">
 	<select id="getUserAuthListByUserId" parameterType="String" resultType="java.util.HashMap">
-		SELECT authInfo.sys_name, sysInfo.user_id, sysInfo.sys_code, sysInfo.status, sysInfo.update_dt, sysInfo.create_dt, sysInfo.prov_dt, sysInfo.flag, sysInfo.sync_dt, sysInfo.sync_ip FROM
-		(SELECT user_id, sys_code, status, update_dt, create_dt, prov_dt, flag, sync_dt, sync_ip
+		SELECT user_id, sys_code, status, update_dt, create_dt, prov_dt, flag, sync_dt, sync_ip
 		FROM wfuser.user_sys_mst_sync
 		WHERE user_id=#{user_id} AND status='3'
 		UNION
 		SELECT user_id, sys_code, status, update_dt, create_dt, prov_dt, flag, sync_dt, sync_ip
 		FROM wfuser.user_sys_mst_ex
-		WHERE user_id=#{user_id} AND status='3') AS sysInfo
-		LEFT OUTER JOIN wfuser.admin_user_auth AS authInfo
-		ON sysInfo.sys_code = authInfo.sys_code
+		WHERE user_id=#{user_id} AND status='3'
 	</select>
-	<select id="getAllAuthManager" resultType="java.util.HashMap">
-		SELECT auth.sys_code, auth.user_id, im.name, im.email
+	<select id="getAllAuthManager" resultType="com.mobis.im.vo.AdminUserAuthVO">
+		SELECT auth.sys_code, auth.sys_name, auth.user_id, im.name, im.email
 		FROM admin_user_auth AS auth
 		LEFT OUTER JOIN 
 		(SELECT user_id, name, email FROM mobis_im_user WHERE status='3') AS im

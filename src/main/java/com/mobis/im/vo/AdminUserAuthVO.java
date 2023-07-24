@@ -21,6 +21,10 @@ public class AdminUserAuthVO {
 	private String user_id; // 사번
 	private String sys_name; // 시스템명
 	
+	// 담당자 추가 정보 - name, email
+	private String name;
+	private String email;
+	
 	public AdminUserAuthVO() {}
 
 	public AdminUserAuthVO(String sys_code, String user_id, String ip, String use_yn,String create_dt,
@@ -108,6 +112,20 @@ public class AdminUserAuthVO {
 	public void setSys_name(String sys_name) {
 		this.sys_name = sys_name;
 	}
-		
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

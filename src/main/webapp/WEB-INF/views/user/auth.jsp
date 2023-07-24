@@ -41,8 +41,7 @@ thead {background-color: #146ac7; color: white;text-align: center; font-weight:b
 			<td>시스템명</td>
 			<td>시스템 담당자</td>
 			<td>계정생성일</td>
-			<td>flag</td>
-			<td>sync_dt</td>
+			<td>사용가능여부</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -52,8 +51,7 @@ thead {background-color: #146ac7; color: white;text-align: center; font-weight:b
 				<td>${row.sys_name}</td>
 				<td>${row.sys_manager}</td>
 				<td>${row.prov_dt}</td>
-				<td>${row.flag}</td>
-				<td>${row.sync_dt}</td>
+				<td>${row.flag!=""?"O":"X"}</td>
 			</tr>
 		</c:forEach>
 	</tbody>

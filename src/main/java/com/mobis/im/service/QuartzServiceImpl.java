@@ -33,14 +33,22 @@ public class QuartzServiceImpl implements QuartzService {
 				/*
 				 * #{to_email}, #{user_id}, #{subject}, #{text}
 				 */
-								
+				
 				UserSysMailHistoryVO user = sendList.get(n);
 				Map<String, String> sendInfo = new HashMap<String, String>();
 				sendInfo.put("user_id", user.getUser_id());
 				sendInfo.put("to_email", "a1156132@mobis-partners.com");
-				sendInfo.put("subject", "IM 메일 발송 테스트");
+				sendInfo.put("subject", "[HYUNDAI MOBIS] IM 테스트");
 				
 				StringBuffer sb = ReadFile.readFile();
+				
+				// ID 매핑
+				while(sb.indexOf("@ID")!=-1) {
+					int idIdx = sb.indexOf("@ID");
+					sb.replace(idIdx, idIdx+3, user.getUser_id());
+				}
+				// mail, teams 사용유무 매핑
+				
 				int offset = sb.indexOf("<tbody>")+7;
 				// 시스템 권한 행추가
 				List<Map<String, String>> authList = userSysMstService.getUserAuthListByUserId(user.getUser_id());
