@@ -1,42 +1,42 @@
-package com.mobis.im.service;
+package com.mobis.im.batch;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.mobis.im.common.ReadFile;
 import com.mobis.im.dao.UserMailDAO;
+import com.mobis.im.service.UserSysMstService;
 import com.mobis.im.vo.UserSysMailHistoryVO;
 
-@Service("quartzService")
-public class QuartzServiceImpl implements QuartzService {
+@Component("sysMailComponent")
+public class SysMailScheduling {
 
 	@Autowired
 	UserMailDAO userMailDAO;
 
 	@Autowired
 	UserSysMstService userSysMstService;
-
-	@Override
-	public void getSendList() throws Exception {
+	
+	public void sendSysMail() throws Exception {
 		List<UserSysMailHistoryVO> sendList = userMailDAO.getSendList();
 		
 		if(sendList != null && sendList.size() > 0) {
 			for(int n = 0; n < sendList.size(); n++) {
-				System.out.println("메일발송 프로시저 호출");
-				/*
-				 * #{to_email}, #{user_id}, #{subject}, #{text}
-				 */
-				
 				UserSysMailHistoryVO user = sendList.get(n);
 				Map<String, String> sendInfo = new HashMap<String, String>();
+				
+				// 테스트 - 하드코딩 영역 수정 필요(user_id, to_email)
+				user.setUser_id("DT095926");
 				sendInfo.put("user_id", user.getUser_id());
 				sendInfo.put("to_email", "a1156132@mobis-partners.com");
-				sendInfo.put("subject", "[HYUNDAI MOBIS] ID : "+user.getUser_id()+", IM System");
+				sendInfo.put("subject", "[HYUNDAI MOBIS] "+user.getUser_id()+" 계정 안내 (Account Guide)");
+				
 				
 				StringBuffer sb = ReadFile.readFile();
 				
@@ -55,11 +55,16 @@ public class QuartzServiceImpl implements QuartzService {
 				for(int i = 0; i < authList.size(); i++) {
 					Map<String, String> auth = authList.get(i);
 					String flag = (auth.get("flag")!=null && !auth.get("flag").equals(""))?"O":"X";
+					String prov_dt = auth.get("prov_dt");
+					SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+					Date date = format.parse(prov_dt);
+					SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					prov_dt = newFormat.format(date);
 					rows.append("<tr>");
 					rows.append("<td style=\"border: 1px solid; border-color:#dee2e6; padding: 5px 12px; text-align: left;\">"+auth.get("sys_code")+"</td>");
 					rows.append("<td style=\"border: 1px solid; border-color:#dee2e6; padding: 5px 12px; text-align: left;\">"+auth.get("sys_name")+"</td>");
 					rows.append("<td style=\"border: 1px solid; border-color:#dee2e6; padding: 5px 12px; text-align: left;\">"+auth.get("sys_manager")+"</td>");
-					rows.append("<td style=\"border: 1px solid; border-color:#dee2e6; padding: 5px 12px; text-align: left;\">"+auth.get("prov_dt")+"</td>");
+					rows.append("<td style=\"border: 1px solid; border-color:#dee2e6; padding: 5px 12px; text-align: left;\">"+prov_dt+"</td>");
 					rows.append("<td style=\"border: 1px solid; border-color:#dee2e6; padding: 5px 12px; text-align: left;\">"+flag+"</td>");
 					rows.append("</tr>");
 				}
@@ -71,4 +76,5 @@ public class QuartzServiceImpl implements QuartzService {
 			}
 		}
 	}
+
 }

@@ -22,6 +22,11 @@
     <mvc:annotation-driven />	
  
     <mvc:resources mapping='/resources/**' location='/resources/'/>
+    
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="/WEB-INF/config/config.properties"/>
+        <property name="fileEncoding" value="UTF-8" />
+    </bean>
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
@@ -98,34 +103,11 @@
 	
 	 -->
 	<!-- Spring batch -->
-	<!-- 스케쥴러 클래스 정의 -->
-	<bean id="jobBean" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="jobComponent" /> <!-- 컴포넌트 설정 -->
-		<property name="targetMethod" value="jobMethod" /> <!-- Method 설정 -->
-		<property name="concurrent" value="false" /> <!-- 동시실행 기능 방지 -->
-	</bean>	
-	<!-- 트리거 설정 -->
-	<bean id="jobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail" ref="jobBean" />
-		<property name="startDelay" value="1000" /> <!-- 서버 가동 후 시작할 시간 -->
-		<property name="repeatInterval" value="10000" /> <!-- 반복 시간 설정 -->
-	</bean>	
-	<!-- 스케쥴러 설정 -->
-	<bean id="jobScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers">
-			<list>
-				<!-- 앞에서 설정한 트리거 등록 -->
-				<ref bean="jobTrigger"/>
-			</list>
-		</property>
-	</bean>
-	
 	<task:annotation-driven />
-	<task:scheduler id="jobTest" pool-size="2" />
+	<task:scheduler id="sysMailJob" pool-size="1" />
 	
-	<!-- <task:scheduled-tasks scheduler="jobTest" >
-		클래스, 메소드 및 시간 설정
-		one schedulling
-		<task:scheduled ref="jobComponent" method="jobMethod" cron="0/10 * * * * ?" />
-	</task:scheduled-tasks> -->	
+	<task:scheduled-tasks scheduler="sysMailJob" >
+		<task:scheduled ref="sysMailComponent" method="sendSysMail" cron="0 0/1 * * * ?" />
+	</task:scheduled-tasks>
+	 
 </beans>

@@ -30,6 +30,9 @@ public class UserSysMstServiceImpl implements UserSysMstService {
 				if(authManagerList.containsKey(sysCode)) {
 					authList.get(i).put("sys_name",authManagerList.get(sysCode).get("sysName"));
 					authList.get(i).put("sys_manager",authManagerList.get(sysCode).get("sysManager"));
+				} else {
+					authList.get(i).put("sys_name","");
+					authList.get(i).put("sys_manager","");
 				}
 			}
 		}
@@ -56,7 +59,7 @@ public class UserSysMstServiceImpl implements UserSysMstService {
 				StringBuilder sb = new StringBuilder();
 				if(managerList.get(sysCode).containsKey("sysManager")) {
 					sb.append(managerList.get(sysCode).get("sysManager"));
-					sb.append(managerInfo);
+					sb.append(", "+managerInfo);
 					managerList.get(sysCode).put("sysManager", sb.toString());
 				}
 			} else {

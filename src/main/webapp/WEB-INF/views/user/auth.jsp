@@ -33,7 +33,7 @@ thead {background-color: #146ac7; color: white;text-align: center; font-weight:b
 </head>
 <body>
 <h1>사용자 권한 목록</h1>
-<p>계정 사용자가 현재 사용한 권한......</p>
+<p>사용자가 현재 사용할 수 있는 시스템 목록입니다.</p>
 <table>
 	<thead>
 		<tr>
