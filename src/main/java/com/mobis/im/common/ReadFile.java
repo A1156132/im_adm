@@ -16,8 +16,8 @@ import org.springframework.core.io.ClassPathResource;
  */
 public class ReadFile {
 	
-	public static StringBuffer readFile() throws IOException {
-		ClassPathResource resource = new ClassPathResource("template/sysMail.html");
+	public static StringBuffer readFile(String classPath) throws IOException {
+		ClassPathResource resource = new ClassPathResource(classPath);
 		
 		Path path = Paths.get(resource.getURI());
 		StringBuffer sb = new StringBuffer();

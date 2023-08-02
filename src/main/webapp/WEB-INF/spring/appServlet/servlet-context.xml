@@ -107,7 +107,7 @@
 	<task:scheduler id="sysMailJob" pool-size="1" />
 	
 	<task:scheduled-tasks scheduler="sysMailJob" >
-		<task:scheduled ref="sysMailComponent" method="sendSysMail" cron="0 0/1 * * * ?" />
+		<task:scheduled ref="sysMailComponent" method="sendSysMail" cron="0/30 * * * * ?" />
 	</task:scheduled-tasks>
 	 
 </beans>
